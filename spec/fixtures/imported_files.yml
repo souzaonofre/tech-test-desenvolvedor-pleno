@@ -1,17 +1,65 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  file_path: MyString
-  email_from: MyString
-  email_to: MyString
-  email_subject: MyString
-  email_body: MyText
+file_email1:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: loja@fornecedorA.com
+  email_to: vendas@suaempresa.com
+  email_subject: Pedido de orçamento - Produto ABC123
+  email_body: "T2zDoSBlcXVpcGUsIEdvc3RhcmlhIGRlIHNvbGljaXRhciBpbmZvcm1hXzVlc+NvZXMgc29icmUgbyBwcm9kdXRvIGRlIGNcdTAwZjNkaWdvIEFCQzEyMy4="
   is_valid: true
 
-two:
-  file_path: MyString
-  email_from: 
-  email_to: 
-  email_subject: 
-  email_body: 
+file_email2:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: loja@fornecedorA.com
+  email_to: vendas@suaempresa.com
+  email_subject: Interesse no produto XYZ987
+  email_body: "UHJlemFkb3MsIEVzdG91IGludGVyZXNzYWRvIG5vIHByb2R1dG8gZGUgY+NkaWdvIFhZWjk4Ny4="
+  is_valid: true
+
+file_email3_invalid:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: loja@fornecedorA.com
+  email_to: vendas@suaempresa.com
+  email_subject: Solicitação de cotação - Produto LMN456
+  email_body: "U29saWNpdGHDoyBkZSBjb3Rhw6fDo28gLSBQcm9kdXRvIExNTjQ1Ng=="
+  is_valid: false
+
+file_email4:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: contato@parceiroB.com
+  email_to: vendas@suaempresa.com
+  email_subject: Cliente interessado no PROD-555
+  email_body: "Equipe, Segue solicitação recebida:"
+  is_valid: true
+
+file_email5:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: contato@parceiroB.com
+  email_to: vendas@suaempresa.com
+  email_subject: Solicitação recebida - PROD-888
+  email_body: "UHJlemFkb3MsIElub3RlcmVzYWRvIG5vIGludmVyY2lvbmF0aW9uIGRlIGNvZG8gUk9ETzg4OC4="
+  is_valid: true
+
+file_email6:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: contato@parceiroB.com
+  email_to: vendas@suaempresa.com
+  email_subject: Pedido de informações - PROD-999
+  email_body: "T2xhLiwgTm9tZSBvZiBjbGllbnQ6IEZlcm5hbmRhbCBsaW1h"
+  is_valid: true
+
+file_email7_invalid:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: loja@fornecedorA.com
+  email_to: vendas@suaempresa.com
+  email_subject: Solicitação de cotação - Produto LMN456
+  email_body: "Qm9tIGlkLiwgVGVuIGhpc2UgbmV0aGVyZW4gbm8gcHJvZHV0byBkZSBQcm9kdXRvIExNTjQ1Ng=="
+  is_valid: false
+
+file_email8_invalid:
+  file_hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b
+  email_from: contato@parceiroB.com
+  email_to: vendas@suaempresa.com
+  email_subject: Pedido de informações - PROD-999
+  email_body: "T2xhLiwgTm9tZSBvZiBjbGllbnQ6IEZlcm5hbmRhbCBsaW1h"
   is_valid: false

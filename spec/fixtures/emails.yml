@@ -1,14 +1,50 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  customer_id: 1
+email1:
+  customer: joao_silva
   produto: ABC123
-  assunto: Pedido de orçamento 
-  contexto: Solicitar informacoes 
+  assunto: Pedido de orçamento - Produto ABC123
+  contexto: Solicitar informações
 
-two:
-  customer_id: 2
+email2:
+  customer: maria_oliveira
   produto: XYZ987
-  assunto:  Interesse no produto  
-  contexto: Estou interessado no produto 
+  assunto: Interesse no produto XYZ987
+  contexto: Interesse no produto
+
+email3:
+  customer: pedro_santos
+  produto: LMN456
+  assunto: Solicitação de cotação - Produto LMN456
+  contexto: Interesse no produto
+
+email4:
+  customer: ana_costa
+  produto: PROD-555
+  assunto: Cliente interessado no PROD-555
+  contexto: Solicitação recebida
+
+email5:
+  customer: ricardo_almeida
+  produto: PROD-888
+  assunto: Solicitação recebida - PROD-888
+  contexto: Informações do cliente
+
+email6:
+  customer: fernanda_lima_invalid
+  produto: PROD-999
+  assunto: Pedido de informações - PROD-999
+  contexto: Pedido de informações
+
+email7:
+  customer: pedro_santos
+  produto: LMN456
+  assunto: Solicitação de cotação - Produto LMN456
+  contexto: Interesse no produto
+
+email8:
+  customer: fernanda_lima
+  produto: PROD-999
+  assunto: Pedido de informações - PROD-999
+  contexto: Pedido de informações
 

@@ -1,11 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  nome: Fulano de Tal 
-  email: fulano@teste.com
-  telefone: 31922223333
+joao_silva:
+  nome: João da Silva
+  email: joao.silva@example.com
+  telefone: 11912345678
 
-two:
-  nome: Ciclano da Silva
-  email: ciclano@teste.com
-  telefone: 31933332222
+maria_oliveira:
+  nome: Maria Oliveira
+  email: maria.oliveira@example.com
+  telefone: 21998765432
+
+pedro_santos_invalid:
+  nome: Pedro Santos
+  email: pedro.santos@example.com
+  telefone: 
+
+ana_costa:
+  nome: Ana Costa
+  email: ana.costa@example.com
+  telefone: 5531977771111
+
+ricardo_almeida:
+  nome: Ricardo Almeida
+  email: ricardo.almeida@example.com
+  telefone: 41988882222
+
+fernanda_lima_invalid:
+  nome: Fernanda Lima
+  email: 
+  telefone: 61933334444
