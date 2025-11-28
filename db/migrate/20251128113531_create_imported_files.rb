@@ -1,4 +1,4 @@
-class CreateEmails < ActiveRecord::Migration[8.0]
+class CreateImportedFiles < ActiveRecord::Migration[8.0]
   def change
     create_table :imported_files do |t|
       t.string :file_hash
