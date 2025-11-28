@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+DOCKER=$(which docker);
+
+PWD=$(pwd);
+#echo "Curr. path: $PWD";
+
+exec "$DOCKER" run --rm -it -v "${PWD}":/rails -u $(id -u):$(id -g) -v ruby-bundle-cache:/bundle -p 3000:3000 ghcr.io/rails/cli "$@";
+
+exit $!;
