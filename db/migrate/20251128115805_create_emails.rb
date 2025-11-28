@@ -1,9 +1,10 @@
-class CreateProducts < ActiveRecord::Migration[8.0]
+class CreateEmails < ActiveRecord::Migration[8.0]
   def change
-    create_table :products do |t|
+    create_table :emails do |t|
       t.references :customer, index: true, foreign_key: true
       t.string :produto
-      t.string :intencao
+      t.string :assunto
+      t.string :contexto
 
       t.timestamps
     end
