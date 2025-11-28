@@ -65,6 +65,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_28_183735) do
     t.string "email_subject"
     t.text "email_body"
     t.boolean "is_valid", default: false
+    t.string "validation_source"
+    t.string "validation_error"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
