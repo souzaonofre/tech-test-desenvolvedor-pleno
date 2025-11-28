@@ -1,0 +1,14 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 2
+  produto: ABC123
+  assunto: Pedido de orçamento 
+  intencao: Solicitar informacoes 
+
+two:
+  customer_id: 1
+  produto: XYZ987
+  assunto:  Interesse no produto  
+  intencao: Estou interessado no produto 
+
