@@ -1,4 +1,4 @@
 class ImportedFile < ApplicationRecord
-    has_one_attached :upload_file
-    validates :upload_file, presence: true
+    has_one_attached :file
+    validates :file, :file_hash, presence: true
 end
