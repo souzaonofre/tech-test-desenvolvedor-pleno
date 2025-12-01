@@ -5,15 +5,15 @@ RSpec.describe "MailParser", type: :class do
   # Global variables
   let(:email_pedido_valido) { File.read(Rails.root.join("spec/fixtures/files/email_pedido_valido.eml")) }
   let(:valid_content_instance) {
-    MailParser.builder(file_content: email_pedido_valido, file_type: :eml)
+    MailParser.builder(email_pedido_valido, :eml)
   }
 
   let(:only_file_content_arg_instance) {
-    MailParser.builder(file_content: email_pedido_valido)
+    MailParser.builder(email_pedido_valido)
   }
 
   let(:invalid_content_instance) {
-    MailParser.builder(file_content: "invalid content", file_type: :eml)
+    MailParser.builder("invalid content", :eml)
   }
 
   describe "#builder" do
@@ -32,6 +32,9 @@ RSpec.describe "MailParser", type: :class do
       it "When is valid_content_instance and #message is Mail::Message returns true" do
         message = valid_content_instance.message
         expect(message.instance_of?(Mail::Message)).to be true
+      end
+      it "When is valid_content_instance and '#message_blank?' returns false" do
+        expect(valid_content_instance.message_blank?).to be false
       end
     end
     context "#message_blank?" do

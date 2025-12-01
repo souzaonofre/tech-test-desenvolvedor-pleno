@@ -2,18 +2,20 @@ require "mail"
 
 module MailParser
   class Eml
-    attr_reader :email_content, :message, :message_headers, :message_body, :error_message
+    attr_reader :email_content, :message, :message_body, :error_message
 
     def initialize(file_content)
       @email_content = file_content
       @error_message = nil
+      @message_body = nil
+      load_message!
+    end
+
+    def load_message!
       @message = Mail.new(@email_content)
-      @message_headers = @message.headers
-      @message_body = @message.body
     rescue Mail::Field::NilParseError, Mail::Field::ParseError
       @error_message = "Fail on tray parser 'eml' content type"
       @message = nil
-      @message_headers = nil
       @message_body = nil
     end
 
@@ -22,27 +24,40 @@ module MailParser
     end
 
     def message_from
-      return nil if @message.from.blank?
+      return nil if message_blank? or @message.from.blank?
       @message.from.first
     end
 
     def message_to
-      return nil if @message.to.blank?
+      return nil if message_blank? or @message.to.blank?
       @message.to.first
     end
 
     def message_subject
-      return nil if @message.subject.blank?
+      return nil if message_blank? or @message.subject.blank?
       @message.subject
     end
 
     def message_body
-      return nil if @message.body.blank? or @message.body.raw_source.blank?
+      return nil if message_blank? or @message.body.blank? or @message.body.raw_source.blank?
       @message.body.raw_source
     end
 
     def has_valid_data?
       (message_from.nil? or message_to.nil? or message_subject.nil? or message_body.nil?) ? false : true
+    end
+
+    def to_s
+      "\n\nFrom: #{message_from}\nTo: #{message_to}\nSubject: #{message_subject}\n\nBody: #{message_body}\n\n"
+    end
+
+    def to_h
+      {
+        from: message_from,
+        to: message_to,
+        subject: message_subject,
+        body: message_body,
+      }
     end
   end
 end
