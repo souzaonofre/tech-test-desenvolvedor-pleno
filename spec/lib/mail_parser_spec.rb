@@ -36,6 +36,15 @@ RSpec.describe "MailParser", type: :class do
       it "When is valid_content_instance and '#message_blank?' returns false" do
         expect(valid_content_instance.message_blank?).to be false
       end
+      it "When is valid_content_instance and '#has_valid_data?' returns true" do
+        expect(valid_content_instance.has_valid_data?).to be true
+      end
+      it "When is valid_content_instance and '#respond_to?(to_s) returns true" do
+        expect(valid_content_instance.respond_to?("to_s")).to be true
+      end
+      it "When is valid_content_instance and '#respond_to?(to_h) returns true" do
+        expect(valid_content_instance.respond_to?("to_h")).to be true
+      end
     end
     context "#message_blank?" do
       it "When is invalid_content_instance and '#message_blank?' returns true" do

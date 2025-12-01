@@ -48,7 +48,7 @@ module MailParser
     end
 
     def to_s
-      "\n\nFrom: #{message_from}\nTo: #{message_to}\nSubject: #{message_subject}\n\nBody: #{message_body}\n\n"
+      "\nFrom: #{message_from}\nTo: #{message_to}\nSubject: #{message_subject}\n\nBody:\n#{message_body}\n:EndBody\n\n"
     end
 
     def to_h
