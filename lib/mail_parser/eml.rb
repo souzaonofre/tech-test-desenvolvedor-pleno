@@ -22,18 +22,27 @@ module MailParser
     end
 
     def message_from
-      return nil if message.from.blank?
+      return nil if @message.from.blank?
       @message.from.first
     end
 
     def message_to
-      return nil if message.to.blank?
+      return nil if @message.to.blank?
       @message.to.first
     end
 
     def message_subject
-      return nil if mssage.subject.blank?
+      return nil if @message.subject.blank?
       @message.subject
+    end
+
+    def message_body
+      return nil if @message.body.blank? or @message.body.raw_source.blank?
+      @message.body.raw_source
+    end
+
+    def is_valid_data?
+      (message_from.nil? or message_to.nil? or message_subject.nil? or message_body.nil?) ? false : true
     end
   end
 end
