@@ -30,7 +30,7 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
-# Direct reference to keep runing mail parsers
+# Direct reference to keep runing mail parsers [https://github.com/mikel/mail]
 gem "mail"
 
 # Reduces boot times through caching; required in config/boot.rb
