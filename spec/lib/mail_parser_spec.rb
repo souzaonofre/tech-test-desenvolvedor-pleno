@@ -30,15 +30,13 @@ RSpec.describe "MailParser", type: :class do
   describe "::Eml" do
     context "#message_parse" do
       it "When is valid file_content and is instance of Mail::Message returns true" do
-        msg = valid_args_instance.message_parse
+        msg = valid_args_instance.message
         expect(msg.instance_of?(Mail::Message)).to be true
       end
       it "When instance of Mail::Message has header or body.parts blanl returns false" do
-        msg = valid_args_instance.message_parse
-        expect(msg.instance_of?(Mail::Message)).to be true
-        headers = msg.headers
-        body_parts = msg.body.parts
-        expect(headers.blank? || body_parts.blank?).to be true
+        message = valid_args_instance.message
+        expect(message.instance_of?(Mail::Message)).to be true
+        expect(valid_args_instance.message_blank?).to be true
       end
     end
   end
