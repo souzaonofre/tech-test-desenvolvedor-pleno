@@ -2,7 +2,7 @@ require "mail"
 
 module MailParser
   class Eml
-    attr_reader :email_content, :message_header_fields, :error_message
+    attr_reader :email_content, :message, :message_header_fields, :error_message
 
     def initialize(file_content)
       @email_content = file_content
@@ -11,14 +11,14 @@ module MailParser
     end
 
     def message_parse
-      msg = Mail.new(@email_content)
-      @message_header_fields = msg.header_fields
+      @message = Mail.new(@email_content)
     rescue Mail::Field::NilParseError, Mail::Field::ParseError
       @error_message = "Fail on tray parser 'eml' content type"
-      @message_header_fields = nil
+      @message = nil
     end
 
     def message_header_fields
+      @message_header_fields = @message.header_fields
       return nil if @message_header_fields.nil? or not @message_header_fields.instance_of?(Mail::FieldList)
       @message_header_fields
     end
