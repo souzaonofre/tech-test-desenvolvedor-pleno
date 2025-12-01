@@ -4,11 +4,11 @@ module MailParser
   class Eml
     attr_reader :storage
 
-    def initialize(storage_blob = nil)
-      unless (storage_blob.nil? == false) or storage_blob.instance_of?(ActiveStorage::Attached::One)
-        raise ArgumentError.new("Invalid storage_blob param.")
-      end
-      @storage = storage_blob
+    def initialize(file_content)
+      @email_content = file_content
+    end
+
+    def header_parse
     end
   end
 end
