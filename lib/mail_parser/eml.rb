@@ -41,7 +41,7 @@ module MailParser
       @message.body.raw_source
     end
 
-    def is_valid_data?
+    def has_valid_data?
       (message_from.nil? or message_to.nil? or message_subject.nil? or message_body.nil?) ? false : true
     end
   end
