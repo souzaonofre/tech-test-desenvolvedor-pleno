@@ -18,26 +18,22 @@ module MailParser
     end
 
     def message_blank?
-      @message.nil? || @message.blank? || @message.headers.blank? || @message.body.parts.blank?
-    end
-
-    def message_headers_blank?
-      @message.nil? || @message.blank? || @message.headers.blank?
+      @message.nil? || @message.blank? || @message.header_fields.blank? || @message.body.raw_source.blank?
     end
 
     def message_from
-      return nil if message_headers_blank? or @message_headers.from.blank?
-      @message_headers.from
+      return nil if message.from.blank?
+      @message.from.first
     end
 
     def message_to
-      return nil if message_headers_blank? or @message_headers.to.blank?
-      @message_headers.to
+      return nil if message.to.blank?
+      @message.to.first
     end
 
     def message_subject
-      return nil if message_headers_blank? or @message_headers.subject.blank?
-      @message_headers.subject
+      return nil if mssage.subject.blank?
+      @message.subject
     end
   end
 end
