@@ -1,3 +1,5 @@
+require "mail"
+
 module MailParser
   class Eml
     attr_reader :storage
