@@ -28,12 +28,14 @@ RSpec.describe "MailParser", type: :class do
     end
   end
   describe "::Eml" do
-    context "#message_parse" do
-      it "When is valid_content_instance #message is Mail::Message returns true" do
-        msg = valid_content_instance.message
-        expect(msg.instance_of?(Mail::Message)).to be true
+    context "#message" do
+      it "When is valid_content_instance and #message is Mail::Message returns true" do
+        message = valid_content_instance.message
+        expect(message.instance_of?(Mail::Message)).to be true
       end
-      it "When invalid_content_instance has #message_headers or #message_body.parts to be 'blank' returns true" do
+    end
+    context "#message_blank?" do
+      it "When is invalid_content_instance and '#message_blank?' returns true" do
         expect(invalid_content_instance.message_blank?).to be true
       end
     end
