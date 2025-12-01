@@ -18,11 +18,11 @@ RSpec.describe "MailParser", type: :class do
   }
 
   describe "#builder" do
-    it "When has valid args and is instance of MailParser::Base returns true" do
-      expect(valid_args_instance.instance_of?(MailParser::Base)).to be true
+    it "When has valid args and is instance of MailParser::Eml returns true" do
+      expect(valid_args_instance.instance_of?(MailParser::Eml)).to be true
     end
-    it "When has only storage_blob arg. and is instance of MailParser::Base returns true" do
-      expect(only_storage_blob_arg_instance.instance_of?(MailParser::Base)).to be true
+    it "When has only storage_blob arg. and is instance of MailParser::Eml returns true" do
+      expect(only_storage_blob_arg_instance.instance_of?(MailParser::Eml)).to be true
     end
     it "When is no arguments instance to raise_error" do
       expect { MailParser.builder() }.to raise_error(ArgumentError)
