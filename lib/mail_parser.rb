@@ -6,7 +6,7 @@ module MailParser
   require "mail_parser/eml"
 
   def self.builder(file_content, file_type = nil)
-    unless (file_content.nil? == false) or file_content.instance_of?(String) or ()
+    unless (file_content.nil? == false) or file_content.instance_of?(String) or (file_content.blank? == false)
       raise ArgumentError.new("Invalid 'file_content' param.")
     end
 
