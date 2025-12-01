@@ -4,7 +4,7 @@ require "mail"
 RSpec.describe "MailParser", type: :class do
   # Global variables
   let(:email_pedido_valido) { File.read(Rails.root.join("spec/fixtures/files/email_pedido_valido.eml")) }
-  let(:valid_args_instance) {
+  let(:valid_content_instance) {
     MailParser.builder(file_content: email_pedido_valido, file_type: :eml)
   }
 
@@ -18,7 +18,7 @@ RSpec.describe "MailParser", type: :class do
 
   describe "#builder" do
     it "When has valid args and is instance of MailParser::Eml returns true" do
-      expect(valid_args_instance.instance_of?(MailParser::Eml)).to be true
+      expect(valid_content_instance.instance_of?(MailParser::Eml)).to be true
     end
     it "When has only file_content arg. and is instance of MailParser::Eml returns true" do
       expect(only_file_content_arg_instance.instance_of?(MailParser::Eml)).to be true
@@ -29,14 +29,12 @@ RSpec.describe "MailParser", type: :class do
   end
   describe "::Eml" do
     context "#message_parse" do
-      it "When is valid file_content and is instance of Mail::Message returns true" do
-        msg = valid_args_instance.message
+      it "When is valid_content_instance #message is Mail::Message returns true" do
+        msg = valid_content_instance.message
         expect(msg.instance_of?(Mail::Message)).to be true
       end
-      it "When instance of Mail::Message has header or body.parts blanl returns false" do
-        message = valid_args_instance.message
-        expect(message.instance_of?(Mail::Message)).to be true
-        expect(valid_args_instance.message_blank?).to be true
+      it "When invalid_content_instance has #message_headers or #message_body.parts to be 'blank' returns true" do
+        expect(invalid_content_instance.message_blank?).to be true
       end
     end
   end
