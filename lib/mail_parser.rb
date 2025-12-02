@@ -10,14 +10,14 @@ module MailParser
       raise ArgumentError.new("Invalid 'content_text' param.")
     end
 
-    raise ArgumentError.new("Exceeded max size limit to 'content_text'.") if content_text.size > Constants::MAX_content_text_SIZE
+    raise ArgumentError.new("Exceeded max size limit to 'content_text'.") if content_text.size > Constants::MAX_FILE_CONTENT_SIZE
 
     content_type = content_type.nil? ? Constants::DEFAULT_content_type : content_type
-    raise ArgumentError.new("Invalid 'content_type' param.") unless Constants::MAIL_content_typeS.index(content_type) >= 0
+    raise ArgumentError.new("Invalid 'content_type' param.") unless Constants::MAIL_FILE_TYPES.index(content_type) >= 0
 
     case content_type
     when :eml then Eml.new(content_text)
-    when :body then body.new(content_text)
+    when :body then Body.new(content_text)
     else
       nil
     end

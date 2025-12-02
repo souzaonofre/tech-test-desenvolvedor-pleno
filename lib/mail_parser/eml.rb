@@ -56,7 +56,7 @@ module MailParser
         from: message_from,
         to: message_to,
         subject: message_subject,
-        body: message_body,
+        body: message_body
       }
     end
   end

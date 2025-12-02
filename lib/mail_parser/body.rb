@@ -2,28 +2,41 @@ require "mail"
 
 module MailParser
   class Body
-    attr_reader :body_stream, :body_fields, :error_message
+    attr_reader :body_stream, :body_fields, :body_unparsed_lines, :error_message
 
     def initialize(body_content)
       @body_stream = body_content
       @body_fields = []
+      @body_unparsed_lines = []
       @error_message = nil
-      scan_body_stream!
+      scan_body_stream
     end
 
-    def scan_body_stream!
-      StringIO.open(@body_stream) do |line|
-        line = line.chop!.strip!.downcase!
-        next! if line.blank? or line.index(":") < 3
-        parts = line.split(":")
-        next! if parts.blank? or String(parts[0]).blank? or parts.size > 2
-        key = String(parts[0]).tr!(" ", "_")
-        @body_fields << { "#{key}": String(parts[1]).strip! }
+    def scan_body_stream
+      StringIO.new(@body_stream).each_line do |line|
+        # line = strio.gets
+        line.chop!.strip!
+        unless line.blank?
+          line.downcase!
+          unless line.blank? or line.index(":").nil? or (line.index(":") < 3)
+            @body_unparsed_lines << line
+            parts = line.split(":")
+            key = parts[0]
+            unless parts.blank? or key.blank? or (parts.size > 2)
+              key.tr!(" ", "_")
+              @body_fields << { "#{key}": parts[1].strip! }
+            end
+          end
+        end
       end
     rescue IOError, RuntimeError
       @error_message = "Fail on tray parser 'eml' content type"
       @body_stream = nil
       @body_fields = []
+    end
+
+    def to_s
+      "\nUnparsed_lines: #{@body_unparsed_lines}\nBody_fields: #{@body_fields}\n"
     end
   end
 end
