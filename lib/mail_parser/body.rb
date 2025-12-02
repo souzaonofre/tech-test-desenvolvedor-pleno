@@ -38,5 +38,12 @@ module MailParser
     def to_s
       "\nUnparsed_lines: #{@body_unparsed_lines}\nBody_fields: #{@body_fields}\n"
     end
+
+    def to_h
+      out = {}
+      @body_fields.each do |it|
+        out.merge(it)
+      end
+    end
   end
 end
