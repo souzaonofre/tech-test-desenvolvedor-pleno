@@ -29,19 +29,24 @@ module MailParser
 
     def scan_body_stream
       StringIO.new(@body_stream).each_line do |line|
-        # line = strio.gets
+        # clean line break and spaces
         line.chop!.strip!
-        unless line.blank?
-          unless line.blank? or line.index(":").nil? or (line.index(":") < 3)
-            @body_unparsed_lines << line
-            parts = line.split(":")
-            key = parts[0]
-            unless parts.blank? or key.blank? or (parts.size > 2)
-              key.downcase!
-              key.tr!(" ", "_").tr!("-", "_") unless Mail::Utilities.atom_safe?(key)
-              new_key = tr_key_by_dict(key)
-              @body_fields << { "#{new_key}": parts[1].strip! } unless new_key.nil?
-            end
+        # check current is valid and have field record
+        unless line.blank? or line.index(":").nil? or (line.index(":") < 3)
+          # save raw field record data
+          @body_unparsed_lines << line
+          # split key and value side of record
+          parts = line.split(":")
+          # verify if have valid parts of key->value record
+          unless parts.blank? or parts[0].blank? or (parts.size > 2)
+            # down case key chars
+            key = String(parts[0]).downcase
+            # normalize key name to valid identifier atom rule, like a slug
+            key.tr!(" ", "_").tr!("-", "_") unless Mail::Utilities.atom_safe?(key)
+            # search and translate dict key names to default identifier
+            new_key = tr_key_by_dict(key)
+            # save normalized field found
+            @body_fields << { "#{new_key}": String(parts[1]).strip } unless new_key.nil?
           end
         end
       end
