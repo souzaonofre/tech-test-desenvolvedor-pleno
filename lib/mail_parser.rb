@@ -5,18 +5,21 @@ module MailParser
   require "mail_parser/constants"
   require "mail_parser/eml"
 
-  def self.builder(file_content, file_type = nil)
-    unless (file_content.nil? == false) or file_content.instance_of?(String) or (file_content.blank? == false)
-      raise ArgumentError.new("Invalid 'file_content' param.")
+  def self.builder(content_text, content_type = nil)
+    unless (content_text.nil? == false) or content_text.instance_of?(String) or (content_text.blank? == false)
+      raise ArgumentError.new("Invalid 'content_text' param.")
     end
 
-    raise ArgumentError.new("Exceeded max size limit to 'file_content'.") if file_content.size > Constants::MAX_FILE_CONTENT_SIZE
+    raise ArgumentError.new("Exceeded max size limit to 'content_text'.") if content_text.size > Constants::MAX_content_text_SIZE
 
-    file_type = file_type.nil? ? Constants::DEFAULT_FILE_TYPE : file_type
-    raise ArgumentError.new("Invalid 'file_type' param.") unless Constants::MAIL_FILE_TYPES.index(file_type) >= 0
+    content_type = content_type.nil? ? Constants::DEFAULT_content_type : content_type
+    raise ArgumentError.new("Invalid 'content_type' param.") unless Constants::MAIL_content_typeS.index(content_type) >= 0
 
-    case file_type
-    when :eml then Eml.new(file_content)
+    case content_type
+    when :eml then Eml.new(content_text)
+    when :body then body.new(content_text)
+    else
+      nil
     end
   end
 end
