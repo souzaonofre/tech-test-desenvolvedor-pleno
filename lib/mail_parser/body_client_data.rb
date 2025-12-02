@@ -1,8 +1,14 @@
 require "mail"
 
 module MailParser
-  class Body
+  class BodyClientData
     attr_reader :body_stream, :body_fields, :body_unparsed_lines, :error_message
+
+    CLIENT_DATA_KEY_DICT = {
+      nome_do_cliente: [ "nome do cliente", "nome cliente", "nome completo", "nome", "cliente" ],
+      email_do_cliente: [ "e-mail do cliente", "email do cliente", "e-mail cliente", "email cliente", "e-mail", "email" ],
+      telefone_do_cliente: [ "telefone", "fone", "tel", "celular", "cel" ]
+    }
 
     def initialize(body_content)
       @body_stream = body_content
@@ -17,13 +23,13 @@ module MailParser
         # line = strio.gets
         line.chop!.strip!
         unless line.blank?
-          line.downcase!
           unless line.blank? or line.index(":").nil? or (line.index(":") < 3)
             @body_unparsed_lines << line
             parts = line.split(":")
             key = parts[0]
             unless parts.blank? or key.blank? or (parts.size > 2)
-              key.tr!(" ", "_")
+              key.downcase!
+              key.tr!(" ", "_").tr!("-", "_") unless Mail::Utilities.atom_safe?(key)
               @body_fields << { "#{key}": parts[1].strip! }
             end
           end
