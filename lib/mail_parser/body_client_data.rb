@@ -31,23 +31,14 @@ module MailParser
       StringIO.new(@body_stream).each_line do |line|
         # clean line break and spaces
         line.chop!.strip!
-        # check current is valid and have field record
-        unless line.blank? or line.index(":").nil? or (line.index(":") < 3)
-          # save raw field record data
-          @body_unparsed_lines << line
-          # split key and value side of record
-          parts = line.split(":")
-          # verify if have valid parts of key->value record
-          unless parts.blank? or parts[0].blank? or (parts.size > 2)
-            # down case key chars
-            key = String(parts[0]).downcase
-            # normalize key name to valid identifier atom rule, like a slug
-            key.tr!(" ", "_").tr!("-", "_") unless Mail::Utilities.atom_safe?(key)
-            # search and translate dict key names to default identifier
-            new_key = tr_key_by_dict(key)
-            # save normalized field found
-            @body_fields << { "#{new_key}": String(parts[1]).strip } unless new_key.nil?
-          end
+        @body_unparsed_lines << line
+        # check current is valid and have field rcd
+        rcd = Utils.basic_record_parser(line)
+        unless rcd.nil? or (rcd.keys.size == 0) or (rcd.values.size == 0)
+          # search and translate dict key names to default identifier
+          new_key = tr_key_by_dict(rcd.keys[0].to_s)
+          # save normalized field found
+          @body_fields << { "#{new_key}": String(rcd.values[0]).strip } unless new_key.nil?
         end
       end
     rescue IOError, RuntimeError
